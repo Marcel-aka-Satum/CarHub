@@ -36,6 +36,12 @@ const SearchBar = () => {
       searchParams.delete("model");
     }
 
+    if (manufacturer) {
+      searchParams.set("manufacturer", manufacturer);
+    } else {
+      searchParams.delete("manufacturer");
+    }
+
     const newPathName = `${
       window.location.pathname
     }?${searchParams.toString()}`;
