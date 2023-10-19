@@ -16,7 +16,7 @@ function CarCard({ car }: CarCardProps) {
   const { city_mpg, year, make, model, transmission, drive } = car;
   const carRent = calculateCarRent(city_mpg, year);
   const [isOpen, setisOpen] = useState(false);
-
+  console.log(isOpen);
   return (
     <div className="car-card group">
       <div className="car-card__content">
@@ -75,7 +75,11 @@ function CarCard({ car }: CarCardProps) {
         </div>
       </div>
 
-      {/* <CarDetails isOpen={isOpen} car={car } closeModel={()=>setisOpen(false)}/> */}
+      <CarDetails
+        isOpen={isOpen}
+        car={car}
+        closeModel={() => setisOpen(false)}
+      />
     </div>
   );
 }
