@@ -12,7 +12,6 @@ export async function fetchCars(filters: FilterProps){
         headers: headersAPI
     });
     const result = await response.json();
-    console.log(result);
     return result;
 };
 
@@ -30,4 +29,17 @@ export const calculateCarRent = (city_mpg: number, year: number) => {
     const rentalRatePerDay = basePricePerDay + mileageRate + ageRate;
   
     return rentalRatePerDay.toFixed(0);
-  };
+};
+
+export const updateSearchParams = (type: string, value: string) => {
+  // Get the current URL search params
+  const searchParams = new URLSearchParams(window.location.search);
+
+  // Set the specified search parameter to the given value
+  searchParams.set(type, value);
+
+  // Set the specified search parameter to the given value
+  const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
+
+  return newPathname;
+};

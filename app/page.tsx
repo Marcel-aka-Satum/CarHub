@@ -2,10 +2,12 @@ import CarCard from "@/components/CarCard";
 import CustomFilter from "@/components/CustomFilter";
 import Hero from "@/components/Hero";
 import SearchBar from "@/components/SearchBar";
+import ShowMore from "@/components/ShowMore";
 import { fuels, yearsOfProduction } from "@/constants";
+import { HomeProps } from "@/types";
 import { fetchCars } from "@/utils/api";
 
-export default async function Home({ searchParams }) {
+export default async function Home({ searchParams }: HomeProps) {
   const allCars = await fetchCars({
     manufacturer: searchParams.manufacturer || "",
     model: searchParams.model || "",
@@ -13,6 +15,7 @@ export default async function Home({ searchParams }) {
     limit: searchParams.limit || 10,
   });
   const emptyData = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
+  console.log(allCars);
   return (
     <main className="overflow-hidden">
       <Hero />
@@ -40,6 +43,10 @@ export default async function Home({ searchParams }) {
               <CarCard car={car} />
             ))}
           </div>
+          <ShowMore
+            pageNumber={(searchParams.limit || 10) / 10} // we are showing 10 cars per page
+            isNext={(searchParams.limit || 10) < allCars?.length} // if the limit is greater than the number of cars, there is no next page
+          />
         </section>
       ) : (
         <div className="home__error-container">
