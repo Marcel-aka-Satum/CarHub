@@ -12,7 +12,7 @@ export default async function Home({ searchParams }: HomeProps) {
     manufacturer: searchParams.manufacturer || "",
     model: searchParams.model || "",
     year: searchParams.year || 2022,
-    limit: searchParams.limit || 10,
+    limit: searchParams.limit || 12,
   });
   const emptyData = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
   console.log(allCars);
